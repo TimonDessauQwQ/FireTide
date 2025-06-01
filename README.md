@@ -32,6 +32,6 @@ FireTide第一开源地址
 #### 贡献者
 
 1.  TimonDessauQwQ
-2.  InfinitySKY
-3.  CRGMxhzzzzzz
-4.  SHENGYUE
+2.  InfinitySKY(已离开)
+3.  CRGMxhzzzzzz(分支留存)
+4.  SHENGYUE(已离开)
