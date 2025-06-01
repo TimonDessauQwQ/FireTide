@@ -9,6 +9,7 @@ FireTide第一开源地址
 1.  链接：https://firetide-code.mysxl.cn
 2.  频道：https://pd.qq.com/s/334e1b43j?b=5
 3.  群聊：https://qm.qq.com/q/yLbnc2TCnK
+4.  二源：https://gitee.com/timobdessojqwq/firetide-x
 
 #### 安装教程
 
