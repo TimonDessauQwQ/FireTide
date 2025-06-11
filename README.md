@@ -2,6 +2,10 @@
 
 ![1000053373](https://github.com/user-attachments/assets/658c37b4-8341-4600-b70a-a9d7ef10e2ff)
 
+### 语言
+
+中文 | [English](./README.en.md)
+
 ### 介绍
 
 # 时隔2年，Fire Tide从Antide的灰烬中存活！
