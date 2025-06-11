@@ -4,7 +4,7 @@
 
 ### language
 
-[Chinese](./README.md) >[English]<
+[Chinese](./README.md) | >[English]<
 
 ### Introduction
 
