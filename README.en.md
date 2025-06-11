@@ -2,6 +2,10 @@
 
 ![1000053373](https://github.com/user-attachments/assets/658c37b4-8341-4600-b70a-a9d7ef10e2ff)
 
+### language
+
+[Chinese](./README.md) >[English]<
+
 ### Introduction
 
 # 2 years, Fire Tide has risen from the ashes of Antide!Let FireTide be a web page
