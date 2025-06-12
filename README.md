@@ -20,9 +20,8 @@
 
 ### 安装教程
 
-会需要一个浏览器
+会需要一个浏览器，然后获取构建代码
 
-获取构建代码
     Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
     Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
     原生构建：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FoWeb
