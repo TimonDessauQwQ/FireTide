@@ -2,6 +2,7 @@
 
 #### 介绍
 
+# 从Antide的暴政中诞生的网页UI
 FireTide第一开源地址
 
 #### 详情
@@ -41,6 +42,5 @@ FireTide第一开源地址
 #### 贡献者
 
 1.  TimonDessauQwQ
-2.  InfinitySKY(已离开)
-3.  CRGMxhzzzzzz(分支留存)
-4.  SHENGYUE(已离开)
+2.  InfinitySKY
+3.  CRGMxhzzzzzz
