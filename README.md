@@ -19,11 +19,13 @@ FireTide第一开源地址
 
 #### 安装教程
 
-    无需安装，需要一个支持的浏览器
+会需要一个浏览器，然后获取构建代码
 
-1.  Microsoft Edge
-2.  FireFox
-3.  手机自带的浏览器
+    Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
+    Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
+    原生构建：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FoWeb
+
+或者可以在Release里直接获取HTML文档
 
 #### 使用说明
 
