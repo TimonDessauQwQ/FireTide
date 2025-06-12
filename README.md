@@ -13,6 +13,10 @@
 让FireTide成为网页，让它拥有更多功能，
 让我们坚持下去，成就最美潮汐！！！
 
+### 从前
+
+在2024年12月16日，FT正式从Antide的暴政中诞生并独立；自此由TimonDessauQwQ主导开发的网页UI    FireTide    在此诞生
+
 ### 安装教程
 
     无需安装，需要一个浏览器
@@ -22,12 +26,6 @@
 1.  用浏览器打开即刻体验
 2.  可以使用html编辑器编辑
 3.  修改后可上传Release分支
-
-### 贡献者
-
-1.  TimonDessauQwQ
-2.  WinnerGET
-3.  CRGMxhzzzzzZ
 
 ### 参与贡献
 
