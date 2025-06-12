@@ -19,7 +19,7 @@ On 16 December 2024, FT was officially born and independent from the tyranny of 
 
 ### Installation tutorial
 
-   No installation required, a browser is required
+    No installation required, a browser is required
 
 ### Instructions for use
 
