@@ -11,13 +11,11 @@
 # After 2 years, Fire Tide survived the tyranny of Antide and became independent!
 Let FireTide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
 
-### About
+### Before
 
-1. Project website: https://firetide-code.mysxl.cn
-2. Official Channel: https://pd.qq.com/s/334e1b43j?b=5
-3. Official Group Chat: https://qm.qq.com/q/j8msB6C56E
-4. Repository links：https://github.com/TimonDessauQwQ/FireTide
-5. Second link: https://gitee.com/timondessojqwq/firetide
+On 16 December 2024, FT was officially born and independent from the tyranny of Antide; since then, the web UI FireTide, developed by Timon DessauQwQ, was born.
+
+[About](./About.md)|[Developer](./开发人员名单.md)
 
 ### Installation tutorial
 
@@ -38,9 +36,3 @@ Let FireTide be a web page,let it have more features,Let us persevere and achiev
 5. Ask questions and raise issues
 6. Join the café technical exchange
 7. Join the review
-
-### Contributors
-
-1. TimonDessauQwQ
-2. WinnerGET
-3. CRGMxhzzzzzZ
