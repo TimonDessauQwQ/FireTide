@@ -1,4 +1,4 @@
-# FIRETIDE-X
+# FIRETIDE
 
 ![1000053373](https://github.com/user-attachments/assets/658c37b4-8341-4600-b70a-a9d7ef10e2ff)
 
