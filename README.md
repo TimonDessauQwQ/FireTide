@@ -17,7 +17,13 @@
 
 #### 使用说明
 
-    仅需一个浏览器，打开即刻体验，可使用并编辑
+会需要一个浏览器，然后获取构建代码
+
+    Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
+    Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
+    原生构建：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FoWeb
+
+或者可以在Release里直接获取HTML文档
 
 #### 贡献者
 
