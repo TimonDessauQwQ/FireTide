@@ -26,6 +26,8 @@
     Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
     原生构建：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FoWeb
 
+或者可以在Release里直接获取HTML文档
+
 ### 使用说明
 
 1.  用浏览器打开即刻体验
