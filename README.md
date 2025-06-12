@@ -8,14 +8,13 @@
 
 ### 介绍
 
-[关于](./About.md)
 # 时隔2年，Fire Tide从Antide的暴政中存活并独立！
 让FireTide成为网页，让它拥有更多功能，
 让我们坚持下去，成就最美潮汐！！！
 
 ### 从前
 
-在2024年12月16日，FT正式从Antide的暴政中诞生并独立；自此由TimonDessauQwQ主导开发的网页UI    FireTide    在此诞生
+在2024年12月16日，FT正式从Antide的暴政中诞生并独立；自此由TimonDessauQwQ主导开发的网页UI FireTide 在此诞生\n [关于](./About.md)|[开发人员](./开发人员名单.txt)
 
 ### 安装教程
 
