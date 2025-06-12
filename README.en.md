@@ -19,7 +19,13 @@ On 16 December 2024, FT was officially born and independent from the tyranny of 
 
 ### Installation tutorial
 
-    No installation required, a browser is required
+You'll need a browser and then get the build code.
+
+    Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
+    Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
+    Built natively：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FoWeb
+
+Alternatively, you can get the HTML file directly from the Release.
 
 ### Instructions for use
 
