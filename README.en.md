@@ -8,8 +8,8 @@
 
 ### Introduction
 
-# 2 years, Fire Tide has risen from the ashes of Antide!Let FireTide be a web page
-let it have more features,Let us persevere and achieve the most beautiful tide!!
+# 2 years, Fire Tide has risen from the ashes of Antide!
+Let FireTide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
 
 ### About
 
