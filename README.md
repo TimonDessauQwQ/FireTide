@@ -39,8 +39,9 @@ FireTide第一开源地址
 4.  新建 Pull Request
 5.  加入咖啡厅技术交流
 
-#### 贡献者
+#### 主要贡献者
 
 1.  TimonDessauQwQ
 2.  InfinitySKY
 3.  CRGMxhzzzzzz
+4.  WinnerGET
