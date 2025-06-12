@@ -8,17 +8,10 @@
 
 ### 介绍
 
+[关于](./About.md)
 # 时隔2年，Fire Tide从Antide的暴政中存活并独立！
 让FireTide成为网页，让它拥有更多功能，
 让我们坚持下去，成就最美潮汐！！！
-
-### 关于
-
-1.  项目网站：https://firetide-code.mysxl.cn
-2.  官方频道：https://pd.qq.com/s/334e1b43j?b=5
-3.  官方群聊：https://qm.qq.com/q/j8msB6C56E
-4.  仓库链接：https://github.com/TimonDessauQwQ/FireTide
-5.  第二链接：https://gitee.com/timondessojqwq/firetide
 
 ### 安装教程
 
@@ -30,6 +23,12 @@
 2.  可以使用html编辑器编辑
 3.  修改后可上传Release分支
 
+### 贡献者
+
+1.  TimonDessauQwQ
+2.  WinnerGET
+3.  CRGMxhzzzzzZ
+
 ### 参与贡献
 
 1.  Fork 本仓库
@@ -39,9 +38,3 @@
 5.  提出问题及议题
 6.  加入咖啡厅技术交流
 7.  加入审核
-
-### 贡献者
-
-1.  TimonDessauQwQ
-2.  WinnerGET
-3.  CRGMxhzzzzzZ
