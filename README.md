@@ -1,4 +1,4 @@
-# FIRETIDE-X 第三方构建
+# FIRETIDE 第三方构建
 
 #### 关于
 
@@ -17,12 +17,10 @@
 
 #### 使用说明
 
-仅需一个浏览器，打开即刻体验
-可使用并编辑
+    仅需一个浏览器，打开即刻体验，可使用并编辑
 
 #### 贡献者
 
 1.  TimonDessauQwQ
 2.  InfinitySKY
 3.  CRGMxhzzzzzz
-4.  SHENGYUE
