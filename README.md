@@ -1,6 +1,7 @@
 # FIRETIDE
 
-![1000053373](https://github.com/user-attachments/assets/658c37b4-8341-4600-b70a-a9d7ef10e2ff)
+![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
+
 
 ### 语言
 
