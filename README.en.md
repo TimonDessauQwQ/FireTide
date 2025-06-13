@@ -8,7 +8,8 @@
 
 ### Introduction
 
-# After 2 years, Fire Tide survived the tyranny of Antide and became independent!
+After 2 years, Fire Tide survived the tyranny of Antide and became independent!
+
 Let FireTide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
 
 ### Before
