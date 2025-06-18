@@ -1,4 +1,4 @@
-# FIRETIDE
+# Fire Tide & Source Tide
 
 ![1000053373](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
 
@@ -10,7 +10,7 @@
 
 After 2 years, Fire Tide survived the tyranny of Antide and became independent!
 
-Let FireTide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
+Let FireTide and Source Tide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
 
 ### Before
 
