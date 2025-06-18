@@ -1,11 +1,10 @@
-# FIRETIDE
-
-![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
-
-
 ### 语言
 
 中文 | [English](./README.en.md)
+
+# FIRETIDE
+
+![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
 
 ### 介绍
 
