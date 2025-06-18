@@ -2,7 +2,7 @@
 
 #### 介绍
 
-# 从Antide的暴政中诞生的网页UI
+从Antide的暴政中诞生的网页UI
 
 FireTide第一开源地址
 
