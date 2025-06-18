@@ -1,4 +1,4 @@
-# FIRETIDE
+# Fire Tide & Source Tide
 
 ![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
 
@@ -11,7 +11,7 @@
 
 时隔2年，Fire Tide从Antide的暴政中存活并独立！
 
-让FireTide成为网页，让它拥有更多功能，
+让FireTide和Source tide成为网页，让它拥有更多功能，
 让我们坚持下去，成就最美潮汐！！！
 
 ### 从前
