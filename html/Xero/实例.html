@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>FireTide Xero</title>
+    <style>
+        :root {
+            /* 默认蓝色主题变量 */
+            --primary-color: #00f7ff;
+            --primary-color-rgb: 0, 247, 255;
+            --secondary-color: #00ff9d;
+            --secondary-color-rgb: 0, 255, 157;
+            --danger-color: #ff3232;
+            --danger-color-rgb: 255, 50, 50;
+            --bg-color: #0a1a2f;
+            --panel-bg: rgba(10, 26, 47, 0.8);
+            --panel-border: 1px solid var(--primary-color);
+            --panel-shadow: 0 0 50px rgba(var(--primary-color-rgb), 0.2);
+            --text-color: var(--primary-color); /* 字体颜色使用主色调 */
+            --scan-animation: scan 3s infinite linear;
+        }
+
+        /* 红色主题变量 */
+        .red-theme {
+            --primary-color: #ff003c;
+            --primary-color-rgb: 255, 0, 60;
+            --secondary-color: #ff8a00;
+            --secondary-color-rgb: 255, 138, 0;
+            --danger-color: #ff3232;
+            --bg-color: #1a0005;
+            --panel-bg: rgba(26, 0, 5, 0.8);
+            --scan-animation: red-scan 3s infinite linear;
+            --text-color: var(--primary-color); /* 红色主题字体颜色 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            color: var(--text-color); /* 全局字体颜色使用主题变量 */
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        /* 粒子背景效果 */
+        #particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .login-container {
+            position: relative;
+            width: 400px;
+            margin: 15% auto;
+            padding: 40px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border: var(--panel-border);
+            box-shadow: var(--panel-shadow);
+            z-index: 1;
+        }
+
+        .hologram-line {
+            position: absolute;
+            top: 0;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, var(--primary-color), transparent);
+            animation: var(--scan-animation);
+        }
+
+        .neon-input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            transition: 0.3s;
+        }
+
+        .cyber-button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, var(--bg-color), #003153);
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .cyber-button:hover {
+            box-shadow: 0 0 20px rgba(var(--primary-color-rgb), 0.2);
+            transform: translateY(-2px);
+        }
+
+        .main-ui {
+            display: none;
+            position: relative;
+            padding: 30px;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .status-bar {
+            padding: 15px;
+            border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .nav-button.active {
+            background: rgba(var(--primary-color-rgb), 0.2);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.2);
+        }
+
+        .nav-button:hover {
+            background: rgba(var(--primary-color-rgb), 0.1);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .icon-item {
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(var(--primary-color-rgb), 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .page-content {
+            padding: 20px;
+            min-height: 400px;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-50px); }
+            100% { transform: translateY(400px); }
+        }
+
+        @keyframes red-scan {
+            0% { transform: translateY(-50px); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translateY(400px); opacity: 0.8; }
+        }
+
+        .hologram-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: linear-gradient(45deg, var(--primary-color), var(--bg-color));
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hologram-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-color);
+            top: 50%;
+            transform: translateY(-50%);
+            animation: pulse 2s infinite;
+        }
+
+        .hologram-icon::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-color);
+            left: 50%;
+            transform: translateX(-50%);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .github-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary-color);
+            transition: all 0.3s;
+        }
+
+        .github-link:hover {
+            color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+        }
+        
+        /* 日志页面样式 */
+        .log-input-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .log-input {
+            flex-grow: 1;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            color: var(--text-color);
+            transition: 0.3s;
+        }
+        
+        .log-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.2);
+        }
+        
+        .log-list {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .log-entry {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .log-entry:hover {
+            background: rgba(var(--primary-color-rgb), 0.05);
+            border-color: var(--primary-color);
+        }
+        
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(var(--primary-color-rgb), 0.2);
+        }
+        
+        .log-time {
+            font-size: 0.85em;
+            color: var(--primary-color);
+        }
+        
+        .log-content {
+            line-height: 1.5;
+        }
+        
+        .delete-log {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 50, 50, 0.2);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+        
+        .delete-log:hover {
+            background: rgba(255, 50, 50, 0.4);
+            transform: scale(1.1);
+        }
+        
+        .dev-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .dev-link:hover {
+            color: #ffffff;
+            border-bottom: 1px solid #ffffff;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(var(--primary-color-rgb), 0.2);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .version-info {
+            background: rgba(var(--primary-color-rgb), 0.05);
+            padding: 15px;
+            border-left: 3px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .system-update {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid rgba(var(--secondary-color-rgb), 0.2);
+            background: rgba(var(--secondary-color-rgb), 0.05);
+        }
+        
+        /* 设置页面样式 */
+        .settings-page {
+            display: none;
+        }
+        
+        .theme-selector {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .theme-option {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .theme-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(var(--primary-color-rgb), 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .theme-option.active {
+            border: 2px solid var(--primary-color);
+            background: rgba(var(--primary-color-rgb), 0.1);
+            box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.2);
+        }
+        
+        .theme-preview {
+            width: 100%;
+            height: 100px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .blue-theme-preview {
+            background: linear-gradient(135deg, #0a1a2f, #003153);
+            border: 1px solid #00f7ff;
+        }
+        
+        .red-theme-preview {
+            background: linear-gradient(135deg, #1a0005, #450012);
+            border: 1px solid #ff003c;
+        }
+        
+        .theme-name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        /* 自定义功能库样式 */
+        .feature-config {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.3);
+            border-radius: 5px;
+        }
+        
+        .feature-config h4 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(var(--primary-color-rgb), 0.2);
+        }
+        
+        .feature-item label {
+            width: 100%;
+            color: var(--secondary-color);
+            font-size: 0.9em;
+        }
+        
+        .feature-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(var(--primary-color-rgb), 0.2);
+            color: var(--text-color);
+            transition: 0.3s;
+        }
+        
+        .feature-input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 10px rgba(var(--secondary-color-rgb), 0.2);
+        }
+        
+        .feature-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .save-config {
+            padding: 10px 25px;
+            background: rgba(var(--secondary-color-rgb), 0.1);
+            border: 1px solid var(--secondary-color);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+        
+        .save-config:hover {
+            background: rgba(var(--secondary-color-rgb), 0.3);
+            box-shadow: 0 0 10px rgba(var(--secondary-color-rgb), 0.2);
+        }
+        
+        .reset-config {
+            padding: 10px 25px;
+            background: rgba(var(--danger-color-rgb), 0.1);
+            border: 1px solid var(--danger-color);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+        
+        .reset-config:hover {
+            background: rgba(var(--danger-color-rgb), 0.3);
+            box-shadow: 0 0 10px rgba(var(--danger-color-rgb), 0.2);
+        }
+        
+        .feature-warning {
+            color: var(--danger-color);
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <canvas id="particles"></canvas>
+
+    <!-- 登录界面 -->
+    <div class="login-container" id="loginPanel">
+        <div class="hologram-line"></div>
+        <h2 style="text-align: center; margin-bottom: 30px;">FIRE•TIDE X 访问</h2>
+        <div class="input-field">
+            <label>管理员ID:</label>
+            <input type="text" id="adminId" class="neon-input" placeholder="输入管理员ID">
+        </div>
+        <div class="input-field">
+            <label>管理员密码:</label> 
+            <input type="password" id="password" class="neon-input" placeholder="输入密码">
+        </div>
+        <button class="cyber-button" onclick="checkLogin()">ACCESS GRANTED</button>
+    </div>
+
+    <!-- 主界面 -->
+    <div class="main-ui" id="mainPanel">
+        <div class="status-bar">
+            <div class="system-info">
+                <span>▼ 连接用户: Administors</span>
+                <span style="margin: 0 30px;">▼ 连接状态: SECURED</span>
+                <span style="margin: 0 30px;">▼ 访问权限: 全局</span>
+                <span>▼ 系统时间: <span id="timeDisplay">11:45:14</span></span>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button active" onclick="switchPage('intro')">主页</button>
+                <button class="nav-button" onclick="switchPage('features')">功能库</button>
+                <button class="nav-button" onclick="switchPage('logs')">日志</button>
+                <button class="nav-button" onclick="switchPage('settings')">设置</button>
+            </div>
+        </div>
+        
+        <!-- 介绍页面 -->
+        <div class="page-content" id="introPage">
+            <h3 class="section-title">FIRE•TIDE Xero</h3>
+            <div class="version-info">
+                <p style="margin-bottom: 10px; line-height: 1.6;">
+                    <strong>释放版本：1.4.0</strong><br>
+                    <strong>FT-X1版本：1.0.0</strong>
+                </p>
+                <p style="line-height: 1.6;">
+                    该代码仅供参考，如果有意见请在Gitee或Github中提出问题
+                </p>
+            </div>
+            
+            <div style="margin-top: 30px; background: rgba(var(--primary-color-rgb), 0.05); padding: 20px; border-left: 3px solid var(--primary-color);">
+                <h4 style="margin-bottom: 15px;">开发人员：</h4>
+                <ul style="margin-top: 10px; padding-left: 20px; list-style-type: none;">
+                    <li style="margin-bottom: 10px;">TimonDessauQwQ</li>
+                    <li style="margin-bottom: 10px;">InfinitySKY</li>
+                    <li style="margin-bottom: 10px;">CRGMxhzzzzzz</li>
+                    <li style="margin-bottom: 10px;">AnnerBilete</li>
+                    <li style="margin-bottom: 10px;">Midsummer</li>
+                    <li>SHENGYUE</li>
+                </ul>
+            </div>
+            
+            <div class="system-update">
+                <h4>系统更新:</h4>
+                <p style="margin-top: 10px;">• 新增主题切换功能（蓝色/红色主题）</p>
+                <p>• 添加设置页面用于主题管理</p>
+                <p>• 优化UI界面和交互体验</p>
+                <p>• 新增功能库链接自定义配置功能</p>
+            </div>
+        </div>
+        
+        <!-- 功能库页面 -->
+        <div class="page-content" id="featuresPage" style="display: none;">
+            <h3 class="section-title">功能库</h3>
+            <div class="icon-grid" id="featuresGrid">
+                <!-- 功能库图标将在这里动态生成 -->
+            </div>
+            <div style="margin-top: 30px; text-align: center;">
+                <p>访问开发者GitHub仓库获取更多资源:</p>
+                <a href="https://www.github.com/TimonDessauQwQ/" class="github-link" target="_blank">
+                    https://www.github.com/TimonDessauQwQ/
+                </a>
+            </div>
+        </div>
+        
+        <!-- 日志页面 -->
+        <div class="page-content" id="logsPage" style="display: none;">
+            <h3 class="section-title">系统日志</h3>
+            <div class="log-input-container">
+                <input type="text" id="logInput" class="log-input" placeholder="输入日志内容...">
+                <button class="cyber-button" style="width: auto; padding: 0 20px;" onclick="addLog()">添加日志</button>
+            </div>
+            
+            <div class="log-list" id="logList">
+                <!-- 日志条目将在这里动态生成 -->
+                <div class="log-entry">
+                    <div class="log-header">
+                        <strong>管理员</strong>
+                        <span class="log-time">2023-06-15 14:30:22</span>
+                    </div>
+                    <div class="log-content">
+                        系统初始化完成，所有模块运行正常。
+                    </div>
+                    <div class="delete-log" onclick="deleteLog(event)">×</div>
+                </div>
+                
+                <div class="log-entry">
+                    <div class="log-header">
+                        <strong>管理员</strong>
+                        <span class="log-time">2025-06-04 03:30:32</span>
+                    </div>
+                    <div class="log-content">
+                        安全检查通过，未发现威胁。
+                    </div>
+                    <div class="delete-log" onclick="deleteLog(event)">×</div>
+                </div>
+                
+                <div class="log-entry">
+                    <div class="log-header">
+                        <strong>系统</strong>
+                        <span class="log-time">2025-06-04 03:30:32</span>
+                    </div>
+                    <div class="log-content">
+                        用户界面更新至v1.4.0版本。
+                    </div>
+                    <div class="delete-log" onclick="deleteLog(event)">×</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 设置页面 -->
+        <div class="page-content settings-page" id="settingsPage">
+            <h3 class="section-title">系统设置</h3>
+            
+            <div class="version-info">
+                <p style="margin-bottom: 10px; line-height: 1.6;">
+                    <strong>当前主题：<span id="currentTheme">蓝色主题</span></strong><br>
+                    选择您偏好的界面主题
+                </p>
+            </div>
+            
+            <h4 style="margin: 30px 0 15px; color: var(--primary-color);">主题选择</h4>
+            <div class="theme-selector">
+                <div class="theme-option active" onclick="switchTheme('blue')" id="blueThemeOption">
+                    <div class="theme-preview blue-theme-preview">
+                        <div style="color: #00f7ff; font-size: 24px;">BLUE</div>
+                    </div>
+                    <div class="theme-name">蓝色主题</div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">默认科技蓝风格</p>
+                </div>
+                
+                <div class="theme-option" onclick="switchTheme('red')" id="redThemeOption">
+                    <div class="theme-preview red-theme-preview">
+                        <div style="color: #ff003c; font-size: 24px;">RED</div>
+                    </div>
+                    <div class="theme-name">红色主题</div>
+                    <p style="margin-top: 10px; font-size: 0.9em;">暗黑危险风格</p>
+                </div>
+            </div>
+            
+            <!-- 自定义功能库配置区域 -->
+            <div class="feature-config">
+                <h4>自定义功能库链接</h4>
+                <div id="featureConfigContainer">
+                    <!-- 功能配置项将在这里动态生成 -->
+                </div>
+                
+                <div class="feature-actions">
+                    <button class="reset-config" onclick="resetFeatureConfig()">重置配置</button>
+                    <button class="save-config" onclick="saveFeatureConfig()">保存配置</button>
+                </div>
+            </div>
+            
+            <div class="system-update">
+                <h4>其他设置:</h4>
+                <p style="margin-top: 10px;">• 界面语言：简体中文</p>
+                <p>• 日期格式：YYYY-MM-DD</p>
+                <p>• 时间显示：24小时制</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 默认功能库配置
+        const defaultFeatures = [
+            { name: "代码编辑器", link: "javascript:alert('代码模块已启动')" },
+            { name: "咖啡厅链接", link: "https://pd.qq.com/s/a6g5xr5bg?b=5" },
+            { name: "功能链接", link: "javascript:alert('功能链接')" },
+            { name: "GitHub 仓库", link: "https://www.github.com/TimonDessauQwQ/" },
+            { name: "功能链接", link: "javascript:alert('功能链接')" },
+            { name: "功能链接", link: "javascript:alert('功能链接')" }
+        ];
+        
+        // 当前功能库配置
+        let currentFeatures = [];
+        
+        // 管理员验证
+        function checkLogin() {
+            const ADMIN_ID = "admin";
+            const ADMIN_PW = "firetide";
+            const btn = document.querySelector('.cyber-button');
+
+            if(document.getElementById("adminId").value === ADMIN_ID && 
+               document.getElementById("password").value === ADMIN_PW) {
+                document.getElementById("loginPanel").style.display = "none";
+                document.getElementById("mainPanel").style.display = "block";
+                initParticles();
+                startClock();
+                loadFeatureConfig();
+                renderFeatureGrid();
+            } else {
+                btn.innerHTML = "ACCESS DENIED!";
+                btn.style.background = "#d90000";
+                setTimeout(() => {
+                    btn.innerHTML = "ACCESS GRANTED";
+                    btn.style.background = "linear-gradient(45deg, var(--bg-color), #003153)";
+                }, 2000);
+            }
+        }
+
+        // 页面切换功能
+        function switchPage(page) {
+            const introPage = document.getElementById('introPage');
+            const featuresPage = document.getElementById('featuresPage');
+            const logsPage = document.getElementById('logsPage');
+            const settingsPage = document.getElementById('settingsPage');
+            const introBtn = document.querySelector('.nav-button:nth-child(1)');
+            const featuresBtn = document.querySelector('.nav-button:nth-child(2)');
+            const logsBtn = document.querySelector('.nav-button:nth-child(3)');
+            const settingsBtn = document.querySelector('.nav-button:nth-child(4)');
+            
+            // 重置所有按钮状态
+            introBtn.classList.remove('active');
+            featuresBtn.classList.remove('active');
+            logsBtn.classList.remove('active');
+            settingsBtn.classList.remove('active');
+            
+            // 隐藏所有页面
+            introPage.style.display = 'none';
+            featuresPage.style.display = 'none';
+            logsPage.style.display = 'none';
+            settingsPage.style.display = 'none';
+            
+            // 显示选中的页面并激活按钮
+            if(page === 'intro') {
+                introPage.style.display = 'block';
+                introBtn.classList.add('active');
+            } else if(page === 'features') {
+                featuresPage.style.display = 'block';
+                featuresBtn.classList.add('active');
+            } else if(page === 'logs') {
+                logsPage.style.display = 'block';
+                logsBtn.classList.add('active');
+            } else if(page === 'settings') {
+                settingsPage.style.display = 'block';
+                settingsBtn.classList.add('active');
+                renderFeatureConfigForm();
+            }
+        }
+
+        // 实时时钟
+        function startClock() {
+            const timeDisplay = document.getElementById('timeDisplay');
+            function updateTime() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                timeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+            updateTime();
+            setInterval(updateTime, 1000);
+        }
+
+        // 灰色粒子背景
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speed = Math.random() * 1 + 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.y += this.speed;
+                    if (this.y > canvas.height) {
+                        this.y = 0;
+                        this.x = Math.random() * canvas.width;
+                    }
+                }
+                draw() {
+                    // 使用灰色粒子
+                    ctx.fillStyle = `rgba(128, 128, 128, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            for(let i = 0; i < 200; i++) {
+                particles.push(new Particle());
+            }
+            animate();
+            
+            // 窗口大小改变时重置画布
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+        
+        // 日志功能
+        function addLog() {
+            const logInput = document.getElementById('logInput');
+            const logContent = logInput.value.trim();
+            
+            if (logContent === '') {
+                alert('日志内容不能为空！');
+                return;
+            }
+            
+            const now = new Date();
+            const timeString = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <div class="log-header">
+                    <strong>管理员</strong>
+                    <span class="log-time">${timeString}</span>
+                </div>
+                <div class="log-content">
+                    ${logContent}
+                </div>
+                <div class="delete-log" onclick="deleteLog(event)">×</div>
+            `;
+            
+            document.getElementById('logList').prepend(logEntry);
+            logInput.value = '';
+            
+            // 添加成功动画
+            logInput.style.borderColor = 'var(--secondary-color)';
+            logInput.style.boxShadow = '0 0 10px rgba(var(--secondary-color-rgb), 0.2)';
+            setTimeout(() => {
+                logInput.style.borderColor = 'rgba(var(--primary-color-rgb), 0.2)';
+                logInput.style.boxShadow = 'none';
+            }, 1000);
+        }
+        
+        function deleteLog(event) {
+            const logEntry = event.target.parentElement;
+            logEntry.style.opacity = '0';
+            logEntry.style.transform = 'translateX(100px)';
+            
+            setTimeout(() => {
+                logEntry.remove();
+            }, 300);
+        }
+        
+        // 按Enter键添加日志
+        document.getElementById('logInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addLog();
+            }
+        });
+        
+        // 主题切换功能
+        function switchTheme(theme) {
+            if (theme === 'red') {
+                document.body.classList.add('red-theme');
+                document.getElementById('currentTheme').textContent = '红色主题';
+                document.getElementById('blueThemeOption').classList.remove('active');
+                document.getElementById('redThemeOption').classList.add('active');
+                
+                // 添加主题切换日志
+                const now = new Date();
+                const timeString = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+                
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <div class="log-header">
+                        <strong>系统</strong>
+                        <span class="log-time">${timeString}</span>
+                    </div>
+                    <div class="log-content">
+                        主题已切换至: 红色主题
+                    </div>
+                    <div class="delete-log" onclick="deleteLog(event)">×</div>
+                `;
+                
+                document.getElementById('logList').prepend(logEntry);
+                
+            } else {
+                document.body.classList.remove('red-theme');
+                document.getElementById('currentTheme').textContent = '蓝色主题';
+                document.getElementById('blueThemeOption').classList.add('active');
+                document.getElementById('redThemeOption').classList.remove('active');
+                
+                // 添加主题切换日志
+                const now = new Date();
+                const timeString = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+                
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <div class="log-header">
+                        <strong>系统</strong>
+                        <span class="log-time">${timeString}</span>
+                    </div>
+                    <div class="log-content">
+                        主题已切换至: 蓝色主题
+                    </div>
+                    <div class="delete-log" onclick="deleteLog(event)">×</div>
+                `;
+                
+                document.getElementById('logList').prepend(logEntry);
+            }
+        }
+        
+        // 功能库自定义配置功能
+        function loadFeatureConfig() {
+            const savedFeatures = localStorage.getItem('featureConfig');
+            if (savedFeatures) {
+                try {
+                    currentFeatures = JSON.parse(savedFeatures);
+                } catch (e) {
+                    console.error('解析功能配置失败，使用默认配置', e);
+                    currentFeatures = [...defaultFeatures];
+                }
+            } else {
+                currentFeatures = [...defaultFeatures];
+            }
+        }
+        
+        function saveFeatureConfig() {
+            // 从表单收集配置数据
+            const featureItems = document.querySelectorAll('.feature-item');
+            const newFeatures = [];
+            
+            let hasError = false;
+            
+            featureItems.forEach((item, index) => {
+                const nameInput = item.querySelector('.feature-name');
+                const linkInput = item.querySelector('.feature-link');
+                const warning = item.querySelector('.feature-warning');
+                
+                // 重置警告
+                warning.style.display = 'none';
+                
+                if (nameInput.value.trim() === '' || linkInput.value.trim() === '') {
+                    warning.textContent = '名称和链接不能为空！';
+                    warning.style.display = 'block';
+                    hasError = true;
+                    return;
+                }
+                
+                // 检查链接格式
+                if (!linkInput.value.startsWith('http') && 
+                    !linkInput.value.startsWith('javascript:')) {
+                    warning.textContent = '链接必须以"http://"、"https://"或"javascript:"开头';
+                    warning.style.display = 'block';
+                    hasError = true;
+                    return;
+                }
+                
+                newFeatures.push({
+                    name: nameInput.value.trim(),
+                    link: linkInput.value.trim()
+                });
+            });
+            
+            if (hasError) {
+                return;
+            }
+            
+            // 保存配置
+            currentFeatures = newFeatures;
+            localStorage.setItem('featureConfig', JSON.stringify(currentFeatures));
+            
+            // 重新渲染功能库
+            renderFeatureGrid();
+            
+            // 显示成功消息
+            alert('功能库配置已保存！');
+            
+            // 添加日志
+            const now = new Date();
+            const timeString = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <div class="log-header">
+                    <strong>系统</strong>
+                    <span class="log-time">${timeString}</span>
+                </div>
+                <div class="log-content">
+                    功能库配置已更新
+                </div>
+                <div class="delete-log" onclick="deleteLog(event)">×</div>
+            `;
+            
+            document.getElementById('logList').prepend(logEntry);
+        }
+        
+        function resetFeatureConfig() {
+            if (confirm('确定要重置功能库配置为默认设置吗？')) {
+                currentFeatures = [...defaultFeatures];
+                localStorage.setItem('featureConfig', JSON.stringify(currentFeatures));
+                renderFeatureConfigForm();
+                renderFeatureGrid();
+                alert('功能库配置已重置为默认设置！');
+                
+                // 添加日志
+                const now = new Date();
+                const timeString = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+                
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <div class="log-header">
+                        <strong>系统</strong>
+                        <span class="log-time">${timeString}</span>
+                    </div>
+                    <div class="log-content">
+                        功能库配置已重置为默认设置
+                    </div>
+                    <div class="delete-log" onclick="deleteLog(event)">×</div>
+                `;
+                
+                document.getElementById('logList').prepend(logEntry);
+            }
+        }
+        
+        function renderFeatureGrid() {
+            const grid = document.getElementById('featuresGrid');
+            grid.innerHTML = '';
+            
+            currentFeatures.forEach((feature, index) => {
+                const item = document.createElement('div');
+                item.className = 'icon-item';
+                
+                // 创建图标
+                const icon = document.createElement('div');
+                icon.className = 'hologram-icon';
+                
+                // 创建功能名称
+                const name = document.createElement('div');
+                name.textContent = feature.name;
+                
+                item.appendChild(icon);
+                item.appendChild(name);
+                
+                // 添加点击事件
+                item.addEventListener('click', function() {
+                    if (feature.link.startsWith('http')) {
+                        window.open(feature.link, '_blank');
+                    } else if (feature.link.startsWith('javascript:')) {
+                        try {
+                            // 安全地执行JavaScript代码
+                            (new Function(feature.link.substring(11)))();
+                        } catch (e) {
+                            console.error('执行JavaScript出错:', e);
+                            alert('执行功能时出错: ' + e.message);
+                        }
+                    } else {
+                        alert(feature.link);
+                    }
+                });
+                
+                grid.appendChild(item);
+            });
+        }
+        
+        function renderFeatureConfigForm() {
+            const container = document.getElementById('featureConfigContainer');
+            container.innerHTML = '';
+            
+            currentFeatures.forEach((feature, index) => {
+                const featureItem = document.createElement('div');
+                featureItem.className = 'feature-item';
+                
+                featureItem.innerHTML = `
+                    <label>功能 #${index + 1}</label>
+                    <input type="text" class="feature-input feature-name" 
+                           placeholder="功能名称" value="${feature.name}">
+                    <input type="text" class="feature-input feature-link" 
+                           placeholder="链接地址" value="${feature.link}">
+                    <div class="feature-warning"></div>
+                `;
+                
+                container.appendChild(featureItem);
+            });
+        }
+    </script>
+</body>
+</html>
