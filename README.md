@@ -1,4 +1,4 @@
-# FIRETIDE 第三方构建
+# FIRETIDE 官方构建
 
 #### 关于
 
@@ -14,6 +14,7 @@
 4.  编辑后上传自己的分支
 5.  或者到咖啡厅上传
 6.  参与审核
+7.  向官方提供代码
 
 #### 使用说明
 
@@ -30,3 +31,4 @@
 1.  TimonDessauQwQ
 2.  InfinitySKY
 3.  CRGMxhzzzzzz
+4.  WinnerGET
