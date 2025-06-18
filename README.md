@@ -1,47 +1,66 @@
-# FIRETIDE
+# FIRETIDE PREVIEW
 
-![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
+#### 介绍
 
+从Antide的暴政中诞生的网页UI
 
-### 语言
+FireTide第一开源地址
 
-中文 | [English](./README.en.md)
+#### 详情
 
-### 介绍
+该分支主要用于预览版维护更新
 
-时隔2年，Fire Tide从Antide的暴政中存活并独立！
+#### 关于
 
-让FireTide成为网页，让它拥有更多功能，
-让我们坚持下去，成就最美潮汐！！！
+1.  项目网站：https://firetide-code.mysxl.cn
 
-### 从前
+2.  官方频道：https://pd.qq.com/s/334e1b43j?b=5
 
-在2024年12月16日，FT正式从Antide的暴政中诞生并独立；自此由TimonDessauQwQ主导开发的网页UI FireTide 在此诞生
+3.  官方群聊：https://qm.qq.com/q/j8msB6C56E
 
-[关于](./other/About.md)|[开发人员](./开发人员名单.md)
+4.  仓库链接：https://github.com/TimonDessauQwQ/FireTide
 
-### 安装教程
+5.  第二链接：https://gitee.com/timondessojqwq/firetide-x
+
+#### 安装教程
 
 会需要一个浏览器，然后获取构建代码
 
     Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
+
     Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
+
     原生构建：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FoWeb
 
 或者可以在Release里直接获取HTML文档
 
-### 使用说明
+#### 使用说明
 
 1.  用浏览器打开即刻体验
+
 2.  可以使用html编辑器编辑
+
 3.  修改后可上传Release分支
 
-### 参与贡献
+#### 参与贡献
 
 1.  Fork 本仓库
+
 2.  新建 Feat_xxx 分支
+
 3.  提交代码
+
 4.  新建 Pull Request
-5.  提出问题及议题
-6.  加入咖啡厅技术交流
-7.  加入审核
+
+5.  加入咖啡厅技术交流
+
+#### 主要贡献者
+
+1.  TimonDessauQwQ
+
+2.  InfinitySKY
+
+3.  CRGMxhzzzzzz
+
+4.  WinnerGET
+
