@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Launcher</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Minecraftia&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #1e1e1e;
+            --bg-darker: #121212;
+            --bg-panel: #2d2d2d;
+            --accent-green: #3c8527;
+            --accent-green-hover: #4a9e2c;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #3c3c3c;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航栏 */
+        .top-bar {
+            height: 50px;
+            background-color: var(--bg-darker);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border-color);
+            -webkit-app-region: drag;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 22px;
+            color: var(--accent-green);
+            margin-right: 30px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-item {
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color var(--transition-speed);
+            -webkit-app-region: no-drag;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-item.active {
+            color: var(--accent-green);
+        }
+
+        .account-section {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .account-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            background-color: #8a6d3b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #ffd700;
+        }
+
+        .account-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 左侧游戏列表 */
+        .games-list {
+            width: 250px;
+            background-color: var(--bg-darker);
+            border-right: 1px solid var(--border-color);
+            padding: 15px 0;
+            overflow-y: auto;
+            transition: transform var(--transition-speed);
+            z-index: 2;
+        }
+
+        .games-header {
+            padding: 0 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+
+        .games-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background-color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .game-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid transparent;
+            transition: all var(--transition-speed);
+        }
+
+        .game-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .game-item.active {
+            background-color: rgba(60, 133, 39, 0.15);
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .game-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #555;
+            border-radius: 4px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .game-info {
+            flex: 1;
+        }
+
+        .game-name {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .game-version {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* 右侧详情面板 */
+        .game-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            overflow-y: auto;
+            transition: all var(--transition-speed);
+        }
+
+        .game-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .game-big-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #666;
+            border-radius: 8px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .game-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .game-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .last-played {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-panel);
+            border-radius: 6px;
+            padding: 15px;
+            flex: 1;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .news-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-item {
+            background-color: var(--bg-panel);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .news-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .news-excerpt {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .launch-section {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .launch-btn {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .launch-btn:hover {
+            background-color: var(--accent-green-hover);
+        }
+
+        .progress-container {
+            width: 300px;
+            height: 8px;
+            background-color: var(--bg-panel);
+            border-radius: 4px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-green);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .settings-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .settings-btn:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        /* 底部状态栏 */
+        .status-bar {
+            height: 30px;
+            background-color: var(--bg-darker);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .status-item {
+            margin-right: 20px;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .games-list {
+                width: 200px;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* 提示框样式 */
+        .link-notification {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(60, 133, 39, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .link-notification.show {
+            opacity: 1;
+        }
+        
+        /* 关于界面样式 */
+        .about-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-darker);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed);
+            z-index: 1;
+        }
+        
+        .about-section.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .about-content {
+            max-width: 600px;
+            width: 100%;
+            background-color: var(--bg-panel);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .about-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .about-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+        }
+        
+        .about-highlight {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .developer-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(60, 133, 39, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+        }
+        
+        .developer-logo {
+            font-size: 48px;
+            color: #4a9e2c;
+        }
+        
+        .developer-text {
+            text-align: left;
+        }
+        
+        .developer-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .developer-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+        
+        .purchase-btn {
+            background: linear-gradient(135deg, var(--accent-green), #2a6c1a);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(60, 133, 39, 0.3);
+        }
+        
+        .purchase-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(60, 133, 39, 0.4);
+            background: linear-gradient(135deg, var(--accent-green-hover), #3c8527);
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all var(--transition-speed);
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .minecraft-logo {
+            font-family: 'Minecraftia', sans-serif;
+            font-size: 32px;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform var(--transition-speed);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(60, 133, 39, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 32px;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .about-footer {
+            margin-top: 30px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .about-footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+        
+        .about-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <div class="top-bar">
+        <div class="logo" id="logo">MINECRAFT</div>
+        <div class="nav-menu">
+            <div class="nav-item active" id="gamesNav">游戏</div>
+            <div class="nav-item" id="aboutNav">关于</div>
+        </div>
+        <div class="account-section">
+            <div class="account-avatar">A</div>
+            <div class="account-name">Admin</div>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <!-- 左侧游戏列表 -->
+        <div class="games-list" id="gamesList">
+            <div class="games-header">
+                <div class="games-title">安装</div>
+                <div class="add-btn">+</div>
+            </div>
+            
+            <div class="game-item active" data-version="1.12.2">
+                <div class="game-icon">New</div>
+                <div class="game-info">
+                    <div class="game-name">1.12.2</div>
+                    <div class="game-version">Minecraft:java版</div>
+                </div>
+            </div>
+            
+            <div class="game-item" data-version="1.8.8" data-link="https://www.mc.js.cool/mc/1.8/">
+                <div class="game-icon">Old</div>
+                <div class="game-info">
+                    <div class="game-name">1.8.8</div>
+                    <div class="game-version">相对稳定的版本</div>
+                </div>
+            </div>
+            
+            <div class="game-item" data-version="1.5.2" data-link="https://www.mc.js.cool/mc/1.5/">
+                <div class="game-icon">Old</div>
+                <div class="game-info">
+                    <div class="game-name">1.5.2</div>
+                    <div class="game-version">对老电脑友好，无汉化</div>
+                </div>
+            </div>
+            
+            <div class="game-item" data-version="classic" data-link="https://classic.minecraft.net/?join=2I-eIPYtzsFKdMW1">
+                <div class="game-icon">Old</div>
+                <div class="game-info">
+                    <div class="game-name">classic</div>
+                    <div class="game-version">对老电脑甚好，无汉化</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧详情面板 -->
+        <div class="game-details" id="gameDetails">
+            <div class="game-header">
+                <div class="game-big-icon">New</div>
+                <div>
+                    <div class="game-title">Minecraft: Java版</div>
+                    <div class="game-subtitle">1.8.8 - 版本</div>
+                    <div class="last-played">上次游玩: 20xx年xx月xx日</div>
+                </div>
+            </div>
+            
+            <div class="game-stats">
+                <div class="stat-card">
+                    <div class="stat-title">游戏时长</div>
+                    <div class="stat-value">114514分钟</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">最后更新</div>
+                    <div class="stat-value">2017年9月18日</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-title">世界数量</div>
+                    <div class="stat-value">启动器无法干涉</div>
+                </div>
+            </div>
+            
+            <div class="news-section">
+                <div class="section-title">最新消息</div>
+                
+                <div class="news-item">
+                    <div class="news-title">✓ 1.12.2更新发布</div>
+                    <div class="news-date">2017年9月18日</div>
+                    <div class="news-excerpt">此次更新修复了若干问题，提升了游戏稳定性和性能...</div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-title">1.8.8</div>
+                    <div class="news-date">2015年7月28日</div>
+                    <div class="news-excerpt">探索新的生物群系、发现并创造，与好友一起旅行...</div>
+                </div>
+            </div>
+            
+            <div class="launch-section">
+                <button class="settings-btn">Release</button>
+                
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <button class="launch-btn" id="launchBtn">
+                    <span>启动游戏</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 关于界面 -->
+        <div class="about-section" id="aboutSection">
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            
+            <div class="about-content">
+                <div class="minecraft-logo">MINECRAFT</div>
+                <h1 class="about-title">
+                    <i class="fas fa-info-circle"></i>
+                    关于启动器
+                </h1>
+                
+                <p class="about-text">
+                    此启动器为 <span class="about-highlight">Minecraft 网页版</span> 调用了mc.js.cool的链接，鸣谢
+                </p>
+                
+                <div class="developer-info">
+                    <div class="developer-logo">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="developer-text">
+                        <div class="developer-name">马牛逼114514</div>
+                        <div class="developer-desc">启动器开发者</div>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="feature-title">极速下载</div>
+                        <div class="feature-desc">无下载功能，此为网页版</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="feature-title">快速启动</div>
+                        <div class="feature-desc">没有版本文件，此为网页版</div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="feature-title">性能监控</div>
+                        <div class="feature-desc">性能监控个屁，此为网页版</div>
+                    </div>
+                </div>
+                
+                <button class="purchase-btn" id="purchaseBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    购买 Minecraft
+                </button>
+                
+                <div class="about-footer">
+                    Minecraft 是 Mojang Studios 的注册商标 | 启动器版本 1.14.514
+                    <br>
+                    本启动器仅用于学习代码目的 | <a href="#">使用源：mc.js.cool</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部状态栏 -->
+    <div class="status-bar">
+        <div class="status-item">就绪</div>
+        <div class="status-item">Java 版本 1.8.0</div>
+        <div class="status-item">分配内存: 512 MB</div>
+    </div>
+    
+    <!-- 链接提示框 -->
+    <div class="link-notification" id="linkNotification">
+        正在打开游戏...
+    </div>
+
+    <script>
+        // 启动按钮功能
+        const launchBtn = document.getElementById('launchBtn');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const linkNotification = document.getElementById('linkNotification');
+        const gamesNav = document.getElementById('gamesNav');
+        const aboutNav = document.getElementById('aboutNav');
+        const gamesList = document.getElementById('gamesList');
+        const gameDetails = document.getElementById('gameDetails');
+        const aboutSection = document.getElementById('aboutSection');
+        const backBtn = document.getElementById('backBtn');
+        const purchaseBtn = document.getElementById('purchaseBtn');
+        const logo = document.getElementById('logo');
+        
+        // 存储当前选中的游戏项
+        let currentGameItem = document.querySelector('.game-item.active');
+        
+        // 显示提示信息
+        function showNotification(message) {
+            linkNotification.textContent = message;
+            linkNotification.classList.add('show');
+            
+            setTimeout(() => {
+                linkNotification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 启动游戏逻辑
+        function launchGame() {
+            // 检查当前选中的游戏项是否有链接属性
+            const link = currentGameItem.getAttribute('data-link');
+            
+            if (link) {
+                // 显示提示信息
+                showNotification(`正在打开 ${currentGameItem.dataset.version} 版本游戏...`);
+                
+                // 模拟短暂的加载效果
+                launchBtn.innerHTML = '<span>加载中...</span>';
+                launchBtn.disabled = true;
+                
+                // 1.5秒后打开链接
+                setTimeout(() => {
+                    window.open(link, '_blank');
+                    launchBtn.innerHTML = '<span>启动游戏</span>';
+                    launchBtn.disabled = false;
+                }, 1500);
+            } else {
+                // 对于没有链接的版本（1.12.2），使用模拟启动逻辑
+                progressContainer.style.display = 'block';
+                launchBtn.innerHTML = '<span>启动中...</span>';
+                launchBtn.disabled = true;
+                
+                // 模拟启动进度
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        // 更新按钮状态
+                        setTimeout(() => {
+                            launchBtn.innerHTML = '<span>启动失败</span>';
+                        }, 500);
+                    }
+                    progressBar.style.width = progress + '%';
+                }, 200);
+            }
+        }
+        
+        // 切换导航项激活状态
+        function setActiveNav(navItem) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            navItem.classList.add('active');
+        }
+        
+        // 显示游戏界面
+        function showGamesView() {
+            setActiveNav(gamesNav);
+            gamesList.style.transform = 'translateX(0)';
+            gameDetails.style.opacity = '1';
+            gameDetails.style.pointerEvents = 'all';
+            aboutSection.classList.remove('active');
+        }
+        
+        // 显示关于界面
+        function showAboutView() {
+            setActiveNav(aboutNav);
+            gamesList.style.transform = 'translateX(-100%)';
+            gameDetails.style.opacity = '0';
+            gameDetails.style.pointerEvents = 'none';
+            aboutSection.classList.add('active');
+        }
+        
+        // 绑定启动按钮事件
+        launchBtn.addEventListener('click', launchGame);
+        
+        // 导航栏事件
+        gamesNav.addEventListener('click', showGamesView);
+        aboutNav.addEventListener('click', showAboutView);
+        logo.addEventListener('click', showGamesView);
+        backBtn.addEventListener('click', showGamesView);
+        
+        // 购买按钮事件
+        purchaseBtn.addEventListener('click', function() {
+            showNotification('正在打开 Minecraft 购买页面...');
+            setTimeout(() => {
+                window.open('https://www.xbox.com/zh-CN/games/store/minecraft-java-bedrock-edition-for-pc/9NXP44L49SHJ/0010/9WLW8ZMP1KRR', '_blank');
+            }, 800);
+        });
+        
+        // 游戏列表项点击事件
+        const gameItems = document.querySelectorAll('.game-item');
+        gameItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除所有active类
+                gameItems.forEach(i => i.classList.remove('active'));
+                // 添加active类到当前项
+                this.classList.add('active');
+                
+                // 更新当前选中的游戏项
+                currentGameItem = this;
+                
+                // 更新右侧面板标题
+                const gameName = this.querySelector('.game-name').textContent;
+                const gameVersion = this.querySelector('.game-version').textContent;
+                document.querySelector('.game-title').textContent = gameName;
+                document.querySelector('.game-subtitle').textContent = gameVersion;
+                
+                // 更新图标内容
+                const iconText = this.querySelector('.game-icon').textContent;
+                document.querySelector('.game-big-icon').textContent = iconText;
+                
+                // 重置启动按钮
+                progressContainer.style.display = 'none';
+                progressBar.style.width = '0%';
+                launchBtn.innerHTML = '<span>启动游戏</span>';
+                launchBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
