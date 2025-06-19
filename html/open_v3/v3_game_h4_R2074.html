@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>跑酷小游戏</title>
+    <style>
+        #game {
+            width: 600px;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(#87CEEB, #E0F6FF);
+        }
+
+        #player {
+            width: 30px;
+            height: 50px;
+            background: #ff5555;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            transition: bottom 0.3s;
+        }
+
+        .obstacle {
+            width: 20px;
+            height: 40px;
+            background: #444;
+            position: absolute;
+            bottom: 0;
+            right: -20px;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+        }
+
+        #gameOver {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <div id="player"></div>
+        <div id="score">得分: 0</div>
+        <div id="gameOver">游戏结束!</div>
+    </div>
+
+    <script>
+        const player = document.getElementById('player');
+        const game = document.getElementById('game');
+        const scoreElement = document.getElementById('score');
+        const gameOverElement = document.getElementById('gameOver');
+
+        let isJumping = false;
+        let score = 0;
+        let gameActive = true;
+        let obstacles = [];
+
+        // 跳跃功能
+        function jump() {
+            if (!isJumping && gameActive) {
+                isJumping = true;
+                let jumpHeight = 100;
+                let jumpUp = setInterval(() => {
+                    if (jumpHeight <= 0) {
+                        clearInterval(jumpUp);
+                        fall();
+                    }
+                    jumpHeight -= 5;
+                    player.style.bottom = jumpHeight + 'px';
+                }, 10);
+            }
+        }
+
+        function fall() {
+            let currentBottom = parseInt(player.style.bottom) || 0;
+            let fallDown = setInterval(() => {
+                if (currentBottom >= 0) {
+                    clearInterval(fallDown);
+                    isJumping = false;
+                    player.style.bottom = '0px';
+                }
+                currentBottom += 5;
+                player.style.bottom = currentBottom + 'px';
+            }, 10);
+        }
+
+        // 生成障碍物
+        function createObstacle() {
+            if (!gameActive) return;
+
+            const obstacle = document.createElement('div');
+            obstacle.classList.add('obstacle');
+            obstacle.style.height = Math.random() * 50 + 20 + 'px';
+            game.appendChild(obstacle);
+            obstacles.push(obstacle);
+
+            let position = 600;
+            const moveInterval = setInterval(() => {
+                if (position <= -20) {
+                    clearInterval(moveInterval);
+                    obstacle.remove();
+                    obstacles = obstacles.filter(obs => obs !== obstacle);
+                    score += 10;
+                    scoreElement.textContent = `得分: ${score}`;
+                }
+
+                if (checkCollision(obstacle)) {
+                    gameOver();
+                }
+
+                position -= 5;
+                obstacle.style.right = position + 'px';
+            }, 20);
+        }
+
+        // 碰撞检测
+        function checkCollision(obstacle) {
+            const playerRect = player.getBoundingClientRect();
+            const obstacleRect = obstacle.getBoundingClientRect();
+
+            return !(playerRect.right < obstacleRect.left || 
+                    playerRect.left > obstacleRect.right ||
+                    playerRect.top > obstacleRect.bottom);
+        }
+
+        // 游戏结束
+        function gameOver() {
+            gameActive = false;
+            gameOverElement.style.display = 'block';
+            obstacles.forEach(obs => obs.remove());
+        }
+
+        // 事件监听
+        document.addEventListener('keydown', (e) => {
+            if ((e.code === 'Space' || e.key === 'ArrowUp') && gameActive) {
+                jump();
+            }
+        });
+
+        // 游戏循环
+        setInterval(() => {
+            if (gameActive && Math.random() < 0.02) {
+                createObstacle();
+            }
+        }, 100);
+
+        // 重新开始（点击游戏区域）
+        game.addEventListener('click', () => {
+            if (!gameActive) {
+                gameActive = true;
+                score = 0;
+                scoreElement.textContent = '得分: 0';
+                gameOverElement.style.display = 'none';
+                obstacles = [];
+            }
+        });
+    </script>
+</body>
+</html>
