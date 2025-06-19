@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Fire潮汐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #0a1a2f;
+            color: #00f7ff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 粒子背景效果 */
+        #particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .login-container {
+            position: relative;
+            width: 400px;
+            margin: 15% auto;
+            padding: 40px;
+            background: rgba(10, 26, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #00f7ff;
+            box-shadow: 0 0 50px #00f7ff33;
+            z-index: 1;
+        }
+
+        .hologram-line {
+            position: absolute;
+            top: 0;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, #00f7ff, transparent);
+            animation: scan 3s infinite linear;
+        }
+
+        .neon-input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00f7ff;
+            color: #00f7ff;
+            transition: 0.3s;
+        }
+
+        .cyber-button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, #0a1a2f, #003153);
+            border: 2px solid #00f7ff;
+            color: #00f7ff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cyber-button:hover {
+            box-shadow: 0 0 20px #00f7ff33;
+        }
+
+        .main-ui {
+            display: none;
+            position: relative;
+            padding: 30px;
+            z-index: 1;
+        }
+
+        .status-bar {
+            padding: 15px;
+            border-bottom: 1px solid #00f7ff33;
+            margin-bottom: 30px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .icon-item {
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #00f7ff33;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-50px); }
+            100% { transform: translateY(400px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <canvas id="particles"></canvas>
+
+    <!-- 登录界面 -->
+    <div class="login-container" id="loginPanel">
+        <div class="hologram-line"></div>
+        <h2 style="text-align: center; margin-bottom: 30px;">FireTide 访问</h2>
+        <div class="input-field">
+            <label>管理员ID:</label>
+            <input type="text" id="adminId" class="neon-input">
+        </div>
+        <div class="input-field">
+            <label>管理员密码:</label> 
+            <input type="password" id="password" class="neon-input">
+        </div>
+        <button class="cyber-button" onclick="checkLogin()">ACCESS GRANTED</button>
+    </div>
+
+    <!-- 主界面 -->
+    <div class="main-ui" id="mainPanel">
+        <div class="status-bar">
+            <span>▼ 连接用户: TimonDessauQwQ</span>
+            <span style="margin: 0 30px;">▼ 连接状态: SECURED</span>
+            <span style="margin: 0 30px;">▼ 访问权限: 全局</span>
+            <span>▼ 系统时间: <span id="timeDisplay">11:45:14</span></span>
+        </div>
+        <div class="icon-grid">
+            <div class="icon-item">
+                <div class="hologram-icon"></div>
+                访问记录
+            </div>
+            <div class="icon-item">
+                <div class="hologram-icon"></div>
+                仓库
+            </div>
+            <div class="icon-item">
+                <div class="hologram-icon"></div>
+                代码
+            <div class="icon-item">
+                <div class="hologram-icon"></div>
+                访问分支
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 管理员验证
+        function checkLogin() {
+            const ADMIN_ID = "123";
+            const ADMIN_PW = "114514";
+            const btn = document.querySelector('.cyber-button');
+
+            if(document.getElementById("adminId").value === ADMIN_ID && 
+               document.getElementById("password").value === ADMIN_PW) {
+                document.getElementById("loginPanel").style.display = "none";
+                document.getElementById("mainPanel").style.display = "block";
+                initParticles();
+            } else {
+                btn.innerHTML = "ACCESS DENIED!";
+                btn.style.background = "#d90000";
+                setTimeout(() => {
+                    btn.innerHTML = "ACCESS GRANTED";
+                    btn.style.background = "linear-gradient(45deg, #0a1a2f, #003153)";
+                }, 2000);
+            }
+        }
+
+        // 简易粒子背景
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2;
+                    this.speed = Math.random() * 3;
+                }
+                update() {
+                    this.y += this.speed;
+                    if (this.y > canvas.height) this.y = 0;
+                }
+                draw() {
+                    ctx.fillStyle = '#00f7ff';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+
+            for(let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
