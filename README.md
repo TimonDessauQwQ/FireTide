@@ -1,4 +1,4 @@
-# FIRETIDE PREVIEW
+<h1 align="center">FIRETIDE PREVIEW</h1>
 
 #### 介绍
 
