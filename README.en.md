@@ -9,7 +9,7 @@
 
 ### Introduction
 
-After 2 years, Fire Tide survived the tyranny of Antide and became independent!
+> After 2 years, Fire Tide survived the tyranny of Antide and became independent! Maybe there was no need to develop this project, and at first CRGMxhzzzzzZ thought so, and then we found that we had to compromise on some things under the pressure of AntidePD; With [us](./other/v1_papertest_h1.md) working together, FireTide was born. After that, we hope that this code will be passed on, just like the footprints we left in this world!
 
 Let FireTide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
 
