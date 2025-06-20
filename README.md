@@ -1,4 +1,4 @@
-# FIRETIDE 第三方构建
+<h1 align="center">FIRETIDE 第三方构建</h1>
 
 #### 关于
 
