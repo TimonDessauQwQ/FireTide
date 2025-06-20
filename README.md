@@ -1,4 +1,4 @@
-<h1 align="center">FIRETIDE 第三方构建</h1>
+<h1 align="center">FireTide 第三方构建</h1>
 
 #### 关于
 
@@ -25,6 +25,7 @@
 
 或者可以在Release里直接获取HTML文档
 
+----
 #### 贡献者
 
 1.  TimonDessauQwQ
