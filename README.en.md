@@ -17,8 +17,6 @@ Let FireTide be a web page,let it have more features,Let us persevere and achiev
 
 On 16 December 2024, FT was officially born and independent from the tyranny of Antide; since then, the web UI FireTide, developed by Timon DessauQwQ, was born.
 
-[About](./other/About.en.md)|[Developer](./开发人员名单.md)
-
 ### Installation tutorial
 
 You'll need a browser and then get the build code.
@@ -44,3 +42,5 @@ Alternatively, you can get the HTML file directly from the Release.
 5. Ask questions and raise issues
 6. Join the café technical exchange
 7. Join the review
+----
+[About](./other/About.en.md)|[Developer](./开发人员名单.md)
