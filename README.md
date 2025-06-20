@@ -1,6 +1,5 @@
 <h1 align="center">FireTide</h1>
 
-<div align="center">
 ### 语言
 
 中文 | [English](./README.en.md)
@@ -18,8 +17,6 @@
 ### 从前
 
 在2024年12月16日，FT正式从Antide的暴政中诞生并独立；自此由TimonDessauQwQ主导开发的网页UI FireTide 在此诞生
-
-[关于](./other/About.md)|[开发人员](./开发人员名单.md)
 
 ### 安装教程
 
@@ -46,3 +43,5 @@
 5.  提出问题及议题
 6.  加入咖啡厅技术交流
 7.  加入审核
+----
+[关于](./other/About.md)|[开发人员](./开发人员名单.md)
