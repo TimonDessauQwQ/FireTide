@@ -1,10 +1,11 @@
+<h1 align="center">FireTide</h1>
+
 ### language
 
-[Chinese](./README.md) | English
+[中文](./README.md) | English
 
-# FIRETIDE
-
-![1000053373](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
+----
+![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
 
 ### Introduction
 
