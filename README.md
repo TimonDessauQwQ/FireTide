@@ -5,22 +5,20 @@
 中文 | [English](./README.en.md)
 
 ----
-![1000057494](https://github.com/user-attachments/assets/71014958-eaf4-4b67-ba99-f6cc97134858)
 
 ### 介绍
 
->时隔2年，Fire Tide从Antide的暴政中存活并独立！也许这个项目没有开发的必要，起初CRGMxhzzzzzZ也是这么认为的，之后我们发现在AntidePD的威压下我们对于一些事不得不做出妥协；在我们共同协商下，FireTide油然而生。在此之后我们更希望这个代码能传承下去，就像是我们在这个世界上留下的足迹！
+这个网页项目仅提供最初始的代码，此代码内留有‘功能库’可留做功能拓展
 
-让FireTide成为网页，让它拥有更多功能，
-让我们坚持下去，成就最美潮汐！！！
+该初始代码并不完善，望以后多多理解，详情可见本项目wiki
 
-### 从前
-
-在2024年12月16日，FT正式从Antide的暴政中诞生并独立；自此由TimonDessauQwQ主导开发的网页UI FireTide 在此诞生
+另外可克隆本仓库做出自己的版本并发布！！！
 
 ### 安装教程
 
 会需要一个浏览器，然后获取构建代码
+
+构建代码可在咖啡厅获取，也可以在main文件中获取（实例）
 
     Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
     Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
@@ -33,15 +31,8 @@
 1.  用浏览器打开即刻体验
 2.  可以使用html编辑器编辑
 3.  修改后可上传Release分支
+4.  可以使用相关的Git工具或文本编辑器编辑
+5.  修改废了就欢迎回来重新下载
 
-### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-5.  提出问题及议题
-6.  加入咖啡厅技术交流
-7.  加入审核
 ----
 [关于](./other/About.md)|[开发人员](./开发人员名单.md)
