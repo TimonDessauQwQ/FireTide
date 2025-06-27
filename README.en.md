@@ -9,17 +9,17 @@
 
 ### Introduction
 
-> After 2 years, Fire Tide survived the tyranny of Antide and became independent! Maybe there was no need to develop this project, and at first CRGMxhzzzzzZ thought so, and then we found that we had to compromise on some things under the pressure of AntidePD; With us working together, FireTide was born. After that, we hope that this code will be passed on, just like the footprints we left in this world!
+This web project only provides the initial code, which includes a 'function library' for possible functionality expansion.
 
-Let FireTide be a web page,let it have more features,Let us persevere and achieve the most beautiful tide!!
+This initial code is not perfect, and I hope for more understanding in the future, for details please see the project's wiki.
 
-### Before
-
-On 16 December 2024, FT was officially born and independent from the tyranny of Antide; since then, the web UI FireTide, developed by Timon DessauQwQ, was born.
+You can also clone this repository to create your own version and publish it!!!
 
 ### Installation tutorial
 
 You'll need a browser and then get the build code.
+
+The constructed code can be obtained from a café, or it can be accessed in the main file (example)
 
     Gutsy：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FGutsy
     Xero：https://github.com/TimonDessauQwQ/FireTide/tree/main/html%2FXero
@@ -38,9 +38,5 @@ Alternatively, you can get the HTML file directly from the Release.
 1. Fork the repository
 2. Create a new Feat_xxx branch
 3. Submit the code
-4. Create a new pull request
-5. Ask questions and raise issues
-6. Join the café technical exchange
-7. Join the review
-----
-[About](./other/About.en.md)|[Developer](./开发人员名单.md)
+4. You can use relevant Git tools or text editors to edit.
+5. If the modification fails, you are welcome to return and download it again.
