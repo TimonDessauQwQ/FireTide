@@ -27,12 +27,6 @@ The constructed code can be obtained from a café, or it can be accessed in the 
 
 Alternatively, you can get the HTML file directly from the Release.
 
-### Instructions for use
-
-1. Open it in your browser and experience it immediately
-2. Can be edited using the HTML editor
-3. After modification, you can upload the Release branch
-
 ### Get involved
 
 1. Fork the repository
